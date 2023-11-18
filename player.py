@@ -1,5 +1,6 @@
 import streamlit as st
 import pafy
+import os
 
 # Function to get video URL
 def get_video_url():
@@ -14,6 +15,18 @@ def display_video(video_url):
         st.video(best_stream.url)
     except Exception as e:
         st.error(f"Error: {str(e)}")
+
+# Download youtube-dl binary
+def download_youtube_dl():
+    os.system("mkdir -p bin")
+    os.system("curl -L https://yt-dl.org/downloads/latest/youtube-dl -o bin/youtube-dl")
+    os.system("chmod +x bin/youtube-dl")
+
+# Check if youtube-dl is available, otherwise download it
+if not os.path.isfile("bin/youtube-dl"):
+    st.warning("Downloading youtube-dl...")
+    download_youtube_dl()
+    st.success("youtube-dl downloaded successfully.")
 
 # Main function
 def main():
