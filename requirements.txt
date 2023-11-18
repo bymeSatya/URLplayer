@@ -1,2 +1,2 @@
 pafy
-youtube-dl==2022.1.24
+youtube-dl
